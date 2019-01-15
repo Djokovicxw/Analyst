@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+{% block head %}
+    <script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+    {{ super() }}
+{% endblock %}
+{% block nav_left %}
+    <div class="panel-body">
+       <img src="{{url_for('static', filename="img/222.jpg")}}" class="img-responsive img-rounded">
+    </div>
+    <div>
+        <p>欢迎管理员，祁祥威</p>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="nav nav-fill nav-pills nav-stacked">
+                <li class="active"><a href="/data">数据统计</a></li>
+                <li><a href="#">行为统计</a></li>
+                <li><a href="#">数据分析</a></li>
+                <li><a href="#">待定标签</a></li>
+                <li><a href="#">待定标签</a></li>
+                <li><a href="#">待定标签</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block detail %}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+          <h1>网站点击量</h1>
+      </div>
+      <div class="panel-body">
+        {{ echart1|safe }}
+        {{ echart2| safe }}
+      </div>
+    </div>
+
+{% endblock %}

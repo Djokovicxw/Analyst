@@ -1,0 +1,51 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+<title>Analyst</title>
+{{super()}}
+{% endblock %}}
+
+{% block navbar %}
+        <div class="row">
+            <div class="navbar navbar-inverse" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a href="/" class="navbar-brand">Analyst</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="/data">数据统计</a></li>
+                        <li><a href="/">联系我们</a></li>
+                    </ul>
+                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">登录</a></li>
+                        <li><a href="#">注册</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            {% block nav_left %}
+            {% endblock %}
+        </div>
+        <div class="col-sm-8">
+            {% block detail  %}
+            <h1>Welcome to Analyst!</h1>
+            {% endblock %}
+        </div>
+        <div class="col-sm-2 nav-right">
+            {% block nav_right %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% block script %}
+
+{% endblock %}
+{% endblock %}
