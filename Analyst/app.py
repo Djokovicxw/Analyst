@@ -16,6 +16,11 @@ def login_in():
     return render_template("login.html")
 
 
+@app.route("/UserProfile")
+def UserProfile():
+    return render_template("UserProfile.html")
+
+
 @app.route("/data")
 def data():
     bar = gen_bar_img()
