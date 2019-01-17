@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from pyecharts import Bar, Pie
 from flask_script import Manager
+
+
 app = Flask(__name__)
 Bootstrap = Bootstrap(app)
 manager = Manager(app)
@@ -19,7 +21,12 @@ def login_in():
 
 @app.route("/UserProfile")
 def UserProfile():
-    return render_template("UserProfile.html")
+    bar = gen_bar_img()
+    pie = gen_pie_img()
+    return render_template("UserProfile.html",
+        echart1=bar.render_embed(),
+        echart2=pie.render_embed()
+    )
 
 
 @app.route("/data")
