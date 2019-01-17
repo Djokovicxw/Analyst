@@ -1,9 +1,10 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from pyecharts import Bar, Pie
-
+from flask_script import Manager
 app = Flask(__name__)
 Bootstrap = Bootstrap(app)
+manager = Manager(app)
 
 
 @app.route("/")
@@ -45,4 +46,4 @@ def gen_pie_img():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    manager.run()
