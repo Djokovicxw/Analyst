@@ -6,8 +6,12 @@
         <h1>网站点击量</h1>
     </div>
     <div class="panel-body">
-      {{ echart1| safe }}
-      {{ echart2| safe }}
+      {{ echart1 | safe }}
+      {{ echart2 | safe }}
     </div>
   </div>
+{% endblock %}
+
+{% block nav_right %}
+<h2>Local time: {{ moment(current_time).format('LLL') }}</h2>
 {% endblock %}

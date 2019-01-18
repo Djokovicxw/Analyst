@@ -2,11 +2,13 @@ from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from pyecharts import Bar, Pie
 from flask_script import Manager
-
+from flask_moment import Moment
+from datetime import datetime
 
 app = Flask(__name__)
 Bootstrap = Bootstrap(app)
 manager = Manager(app)
+momentt = Moment(app)
 
 
 @app.route("/")
@@ -25,7 +27,8 @@ def UserProfile():
     pie = gen_pie_img()
     return render_template("UserProfile.html",
         echart1=bar.render_embed(),
-        echart2=pie.render_embed()
+        echart2=pie.render_embed(),
+        current_time = datetime.utcnow() 
     )
 
 
@@ -55,7 +58,7 @@ def gen_pie_img():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
-    
+
 
 if __name__ == '__main__':
     manager.run()

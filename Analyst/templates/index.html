@@ -47,7 +47,8 @@
     </div>
 </div>
 
-{% block script %}
-
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
 {% endblock %}
 {% endblock %}
