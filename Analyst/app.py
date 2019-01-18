@@ -7,7 +7,6 @@ from datetime import datetime
 
 app = Flask(__name__)
 Bootstrap = Bootstrap(app)
-manager = Manager(app)
 momentt = Moment(app)
 
 
@@ -61,4 +60,4 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    manager.run()
+    app.run(debug=True)
