@@ -13,5 +13,5 @@
 {% endblock %}
 
 {% block nav_right %}
-<h2>Local time: {{ moment(current_time).format('LLL') }}</h2>
+<h2>Local time: {{ moment(current_time).format('LLL', refresh=True) }}</h2>
 {% endblock %}
