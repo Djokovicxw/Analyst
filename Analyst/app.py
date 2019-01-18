@@ -4,10 +4,12 @@ from pyecharts import Bar, Pie
 from flask_script import Manager
 from flask_moment import Moment
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 Bootstrap = Bootstrap(app)
 momentt = Moment(app)
+db = SQLAlchemy(app)
 
 
 @app.route("/")
