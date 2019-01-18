@@ -23,7 +23,9 @@ def login_in():
 @app.route("/UserProfile")
 def UserProfile():
     bar = gen_bar_img()
-    pie = gen_pie_img()
+    dict1 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    dict2 = [100, 200, 134, 111, 300, 512, 567]
+    pie = gen_pie_img("用户点击量", dict1, dict2, "Last Week", True )
     return render_template("UserProfile.html",
         echart1=bar.render_embed(),
         echart2=pie.render_embed(),
@@ -34,7 +36,9 @@ def UserProfile():
 @app.route("/data")
 def data():
     bar = gen_bar_img()
-    pie = gen_pie_img()
+    dict1 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    dict2 = [100, 200, 134, 111, 300, 512, 567]
+    pie = gen_pie_img("用户点击量", dict1, dict2, "Last Week", True )
     return render_template("data.html",
                            echart1=bar.render_embed(),
                            echart2=pie.render_embed())
@@ -47,10 +51,9 @@ def gen_bar_img():
     return bar
 
 
-def gen_pie_img():
-    pie = Pie("Last Week")
-    pie.add("用户点击量", ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-            [100, 200, 134, 111, 300, 512, 567], is_label_show=True)
+def gen_pie_img(name, dict1, dict2, title="title", flag=True):
+    pie = Pie(title)
+    pie.add(name, dict1, dict2, is_label_show=flag)
     return pie
 
 
