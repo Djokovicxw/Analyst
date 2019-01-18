@@ -3,7 +3,7 @@
 {% block detail %}
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h1>网站点击量</h1>
+        <h1>数据统计</h1>
     </div>
     <div class="panel-body">
       {{ echart1 | safe }}
@@ -14,5 +14,5 @@
 
 {% block nav_right %}
 <p>Local time:</p>
-<p> {{ moment(current_time).format('h:mm:ss',refresh=true) }}</p>
+<p> {{ moment(current_time).format('h:mm:ss', refresh=true) }}</p>
 {% endblock %}

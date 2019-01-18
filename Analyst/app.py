@@ -23,9 +23,9 @@ def login_in():
 @app.route("/UserProfile")
 def UserProfile():
     bar = gen_bar_img()
-    dict1 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    dict2 = [100, 200, 134, 111, 300, 512, 567]
-    pie = gen_pie_img("用户点击量", dict1, dict2, "Last Week", True )
+    dict1 = ['访问主页', '注册', '购买商品', '售后询问', '技术咨询', '访问论坛', '其他']
+    dict2 = [900, 142, 134, 111, 300, 512, 567]
+    pie = gen_pie_img("具体行为", dict1, dict2, "Last Week", True )
     return render_template("UserProfile.html",
         echart1=bar.render_embed(),
         echart2=pie.render_embed(),
@@ -36,9 +36,9 @@ def UserProfile():
 @app.route("/data")
 def data():
     bar = gen_bar_img()
-    dict1 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    dict2 = [100, 200, 134, 111, 300, 512, 567]
-    pie = gen_pie_img("用户点击量", dict1, dict2, "Last Week", True )
+    dict1 = ['访问主页', '注册', '购买商品', '售后询问', '技术咨询', '访问论坛', '其他']
+    dict2 = [900, 142, 134, 111, 300, 512, 567]
+    pie = gen_pie_img("行为统计", dict1, dict2, "Last Week", True )
     return render_template("data.html",
                            echart1=bar.render_embed(),
                            echart2=pie.render_embed())
