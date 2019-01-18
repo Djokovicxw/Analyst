@@ -1,7 +1,13 @@
 {% extends 'data.html' %}
 
 {% block detail %}
-    <div id="">
-        
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h1>网站点击量</h1>
     </div>
+    <div class="panel-body">
+      {{ echart1| safe }}
+      {{ echart2| safe }}
+    </div>
+  </div>
 {% endblock %}
