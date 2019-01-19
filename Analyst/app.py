@@ -4,17 +4,21 @@ from pyecharts import Bar, Pie
 from flask_script import Manager
 from flask_moment import Moment
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
+import pymysql
 
 app = Flask(__name__)
 Bootstrap = Bootstrap(app)
 momentt = Moment(app)
-db = SQLAlchemy(app)
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    con = pymysql.connect(host='localhost',user='qw', password='', db='mysql')
+    cur = con.cursor()
+    sql = "SELECT `user` from `user`"
+    cur.execute(sql)
+    res = cur.fetchall()
+    return render_template("index.html", user=res)
 
 
 @app.route("/login")
