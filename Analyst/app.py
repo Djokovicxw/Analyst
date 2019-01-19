@@ -7,13 +7,14 @@ from datetime import datetime
 import pymysql
 
 app = Flask(__name__)
+app.config.from_pyfile('default_config.py')
 Bootstrap = Bootstrap(app)
 momentt = Moment(app)
 
 
 @app.route("/")
 def index():
-    con = pymysql.connect(host='localhost',user='qw', password='', db='mysql')
+    con = pymysql.connect(host='localhost',user='qw', password=app.config.get('PASSWORD'), db='mysql')
     cur = con.cursor()
     sql = "SELECT `user` from `user`"
     cur.execute(sql)
