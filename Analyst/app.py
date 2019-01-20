@@ -9,17 +9,17 @@ import pymysql
 app = Flask(__name__)
 app.config.from_pyfile('default_config.py')
 Bootstrap = Bootstrap(app)
-momentt = Moment(app)
+moment = Moment(app)
 
 
-@app.route("/")
-def index():
-    con = pymysql.connect(host='localhost',user='qw', password=app.config.get('PASSWORD'), db='mysql')
-    cur = con.cursor()
-    sql = "SELECT `user` from `user`"
-    cur.execute(sql)
-    res = cur.fetchall()
-    return render_template("index.html", user=res)
+    @app.route("/")
+    def index():
+        con = pymysql.connect(host='localhost',user='qw', password=app.config.get('PASSWORD'), db='mysql')
+        cur = con.cursor()
+        sql = "SELECT `user` from `user`"
+        cur.execute(sql)
+        res = cur.fetchall()
+        return render_template("index.html", user=res)
 
 
 @app.route("/login")
