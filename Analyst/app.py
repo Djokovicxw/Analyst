@@ -5,6 +5,8 @@ from flask_script import Manager
 from flask_moment import Moment
 from datetime import datetime
 import pymysql
+import numpy as np 
+import pandas as pd 
 
 app = Flask(__name__)
 app.config.from_pyfile('default_config.py')
@@ -12,14 +14,14 @@ Bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 
-    @app.route("/")
-    def index():
-        con = pymysql.connect(host='localhost',user='qw', password=app.config.get('PASSWORD'), db='mysql')
-        cur = con.cursor()
-        sql = "SELECT `user` from `user`"
-        cur.execute(sql)
-        res = cur.fetchall()
-        return render_template("index.html", user=res)
+@app.route("/")
+def index():
+    con = pymysql.connect(host='localhost',user='qw', password=app.config.get('PASSWORD'), db='mysql')
+    cur = con.cursor()
+    sql = "SELECT `user` from `user`"
+    cur.execute(sql)
+    res = cur.fetchall()
+    return render_template("index.html", user=res)
 
 
 @app.route("/login")
@@ -52,9 +54,18 @@ def data():
 
 
 def gen_bar_img():
-    bar = Bar("Last Week")
-    bar.add("用户点击量", ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-            [100, 200, 134, 111, 300, 512, 567], mark_line=["average"], mark_point=["max"])
+    db = pymysql.connect(host='localhost', user='qw', password=app.config.get('PASSWORD'), db='7law')
+    sql = "select * from `all_gzdata`"
+    df = pd.read_sql(sql, db, chunksize=10000)
+    counts = [i['fullURLId'].value_counts() for i in df]
+    counts = pd.concat(counts).groupby(level=0).sum()
+    counts = counts.reset_index()
+    counts.columns = ['index', 'num']
+    counts['type'] = counts['index'].apply(lambda x: x[:3])
+    counts_ = counts[['type', 'num']].groupby('type').sum()
+    bar = Bar('页面访问量', '按页面内容分类')
+    bar.add('', [i for i in counts_.index], [i[0] for i in counts_.values], is_more_utils=True)
+    db.close()
     return bar
 
 
