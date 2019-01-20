@@ -38,7 +38,6 @@ def UserProfile():
     return render_template("UserProfile.html",
         echart1=bar.render_embed(),
         echart2=pie.render_embed(),
-        current_time = datetime.utcnow() 
     )
 
 
@@ -55,7 +54,7 @@ def data():
 
 def gen_bar_img():
     db = pymysql.connect(host='localhost', user='qw', password=app.config.get('PASSWORD'), db='7law')
-    sql = "select * from `all_gzdata`"
+    sql = "select `fullURLId` from `all_gzdata`"
     df = pd.read_sql(sql, db, chunksize=10000)
     counts = [i['fullURLId'].value_counts() for i in df]
     counts = pd.concat(counts).groupby(level=0).sum()
