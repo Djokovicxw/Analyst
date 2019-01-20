@@ -1,12 +1,13 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
-from pyecharts import Bar, Pie
+from pyecharts import Bar, Pie, Liquid, Line
 from flask_script import Manager
 from flask_moment import Moment
 from datetime import datetime
 import pymysql
 import numpy as np 
 import pandas as pd 
+import random
 
 app = Flask(__name__)
 app.config.from_pyfile('default_config.py')
@@ -44,12 +45,11 @@ def UserProfile():
 @app.route("/data")
 def data():
     bar = gen_bar_img()
-    dict1 = ['访问主页', '注册', '购买商品', '售后询问', '技术咨询', '访问论坛', '其他']
-    dict2 = [900, 142, 134, 111, 300, 512, 567]
-    pie = gen_pie_img("行为统计", dict1, dict2, "Last Week", True )
+    line = Line("访问量")
+    line.add('', [i in range(1, 30)], [i in range (1,30) ])
     return render_template("data.html",
                            echart1=bar.render_embed(),
-                           echart2=pie.render_embed())
+                           echart2=line.render_embed())
 
 
 def gen_bar_img():
