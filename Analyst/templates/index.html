@@ -34,21 +34,11 @@
             {% block nav_left %}
             {% endblock %}
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-10">
             {% block detail  %}
             <h1>Hello, {{ user }}, welcome to Analyst!</h1>
-            {% endblock %}
-        </div>
-        <div class="col-sm-2 nav-right">
-            {% block nav_right %}
-
             {% endblock %}
         </div>
     </div>
 </div>
 
-{% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
-{% endblock %}
-{% endblock %}
