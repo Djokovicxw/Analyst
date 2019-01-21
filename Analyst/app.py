@@ -46,7 +46,7 @@ def UserProfile():
 def data():
     bar = gen_bar_img()
     line = Line("访问量")
-    line.add('', [_ in range(1, 30)], [random.randomint(500,1000) for _ in range (1,30) ])
+    line.add('', [i for i in range(1, 30)], [random.randint(500,1000) for _ in range (1,30) ])
     return render_template("data.html",
                            echart1=bar.render_embed(),
                            echart2=line.render_embed())
