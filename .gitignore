@@ -4,3 +4,4 @@ envriroment/*
 default_config.py
 Analyst/static/bower_components/*
 Analyst/static/dist/*
+Analyst/settings.py
