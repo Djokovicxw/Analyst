@@ -6,3 +6,5 @@ Analyst/static/bower_components/*
 
 Analyst/static/dist/*
 Analyst/settings.py
+*.pyc
+Analyst/static/plugins/*
