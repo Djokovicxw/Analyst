@@ -1,116 +1,96 @@
-<html>
-{%block head %}
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Analyst</title>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="{{url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{url_for('static', filename='bower_components/font-awesome/css/font-awesome.min.css')}}">
-  <link rel="stylesheet" href="{{url_for('static', filename='bower_components/Ionicons/css/ionicons.min.css')}}">
-  <link rel="stylesheet" href="{{url_for('static', filename='dist/css/AdminLTE.min.css')}}">
-  <link rel="stylesheet" href="{{url_for('static', filename='dist/css/skins/skin-blue.min.css')}}">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  <script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
-  
-</head>
-{% endblock %}
+{% extends 'index.html' %}
 
-<body class="hold-transition skin-blue layout-boxed sidebar-mini">
-  <header class="main-header">
-    {% block header %}
-    <a href="data_v2" class="logo">
+{% block header %}
+<a href="/data" class="logo">
 
-      <span class="logo-mini"><b></b>P</span>
-      <span class="logo-lg"><b>Analyst</b></span>
-    </a>
+  <span class="logo-mini"><b></b>P</span>
+  <span class="logo-lg"><b>Analyst</b></span>
+</a>
 
-    
-    <nav class="navbar navbar-static-top" role="navigation">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">4条新消息</li>
-              <li>
-                <!-- inner menu: contains the messages -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        同事小李
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <!-- The message -->
-                      <p>请帮我查看一下服务器日志文件</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                </ul>
-                <!-- /.menu -->
-              </li>
-              <li class="footer"><a href="#">查看所有消息</a></li>
-            </ul>
-          </li>
-          <!-- /.messages-menu -->
-
-          <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="user-image" alt="User Image">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Administrator</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- The user image in the menu -->
-              <li class="user-header">
-                <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="img-circle" alt="User Image">
-
-                <p>
-                    Administrator
-                  <small>这家伙很懒，什么都没有留下…</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-info btn-flat">个人信息</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-warning btn-flat">退出登陆</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
+<nav class="navbar navbar-static-top" role="navigation">
+  <!-- Sidebar toggle button-->
+  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+    <span class="sr-only">Toggle navigation</span>
+  </a>
+  <!-- Navbar Right Menu -->
+  <div class="navbar-custom-menu">
+    <ul class="nav navbar-nav">
+      <!-- Messages: style can be found in dropdown.less-->
+      <li class="dropdown messages-menu">
+        <!-- Menu toggle button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-envelope-o"></i>
+          <span class="label label-success">4</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="header">4条新消息</li>
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <!-- inner menu: contains the messages -->
+            <ul class="menu">
+              <li><!-- start message -->
+                <a href="#">
+                  <div class="pull-left">
+                    <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="img-circle" alt="User Image">
+                  </div>
+                  <h4>
+                    同事小李
+                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                  </h4>
+                  <!-- The message -->
+                  <p>请帮我查看一下服务器日志文件</p>
+                </a>
+              </li>
+              <!-- end message -->
+            </ul>
+            <!-- /.menu -->
+          </li>
+          <li class="footer"><a href="#">查看所有消息</a></li>
+        </ul>
+      </li>
+      <!-- /.messages-menu -->
+
+      <li class="dropdown user user-menu">
+        <!-- Menu Toggle Button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <!-- The user image in the navbar-->
+          <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="user-image" alt="User Image">
+          <!-- hidden-xs hides the username on small devices so only the image appears. -->
+          <span class="hidden-xs">Administrator</span>
+        </a>
+        <ul class="dropdown-menu">
+          <!-- The user image in the menu -->
+          <li class="user-header">
+            <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="img-circle" alt="User Image">
+
+            <p>
+                Administrator
+              <small>这家伙很懒，什么都没有留下…</small>
+            </p>
+          </li>
+          <!-- Menu Body -->
+
+          <!-- Menu Footer-->
+          <li class="user-footer">
+            <div class="pull-left">
+              <a href="#" class="btn btn-info btn-flat">个人信息</a>
+            </div>
+            <div class="pull-right">
+              <a href="#" class="btn btn-warning btn-flat">退出登陆</a>
+            </div>
           </li>
         </ul>
-      </div>
-    </nav>  
-    {% endblock %}
-  </header>
+      </li>
+      <!-- Control Sidebar Toggle Button -->
+      <li>
+        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>  
+{% endblock %}
 
 
-
+{% block sidebar %}
   <aside class="main-sidebar">
     <section class="sidebar">
       <div class="user-panel">
@@ -123,7 +103,7 @@
           <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
         </div>
       </div>
-      {% block sidebar %}
+      
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">功能模版</li>
@@ -151,7 +131,7 @@
   </aside>
   {% endblock %}
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  {% block content %}
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -213,21 +193,11 @@
         </div>
     </section>
     <!-- /.content -->
-  </div>
+  {% endblock %}
   <!-- /.content-wrapper -->
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      <a>联系作者</a>
-    </div>
-    <!-- Default to the left -->
-    <strong>版权所有 &copy; 2018 <a href="#">Elite</a>.</strong>
-  </footer>
-
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+  {% block controler %}
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -296,17 +266,9 @@
       </div>
       <!-- /.tab-pane -->
     </div>
-  </aside>
+  {% endblock %}
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-{% block script %}
-<script src="{{url_for('static', filename='bower_components/jquery/dist/jquery.min.js')}}"></script>
-
-<script src="{{url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-
-<script src="{{url_for('static', filename='dist/js/adminlte.min.js')}}"></script>
-{% endblock %}
 </body>
 </html>
