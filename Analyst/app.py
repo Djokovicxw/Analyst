@@ -39,7 +39,7 @@ def data():
     bar = gen_pie_img("具体行为", dict1, dict2, "Last Week", True)
     line = Line("访问量")
     line.add('', [i for i in range(1, 30)], [random.randint(500,1000) for _ in range (1,30) ])
-    return render_template("data_v2.html",
+    return render_template("data.html",
                            echart1=bar.render_embed(),
                            echart2=line.render_embed())
 

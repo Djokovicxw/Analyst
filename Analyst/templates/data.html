@@ -1,38 +1,274 @@
 {% extends 'index.html' %}
-{% block head %}
-    <script src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
-    {{ super() }}
-{% endblock %}
-{% block nav_left %}
-    <div class="panel-body">
-       <img src="{{url_for('static', filename="img/222.jpg")}}" class="img-responsive img-rounded">
-    </div>
-    <div>
-        <p>欢迎管理员，祁祥威</p>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <ul class="nav nav-fill nav-pills nav-stacked">
-                <li class="active"><a href="/data">数据统计</a></li>
-                <li><a href="UserProfile">行为统计</a></li>
-                <li><a href="#">待定标签</a></li>
-                <li><a href="#">待定标签</a></li>
-                <li><a href="#">待定标签</a></li>
-                <li><a href="#">待定标签</a></li>
+
+{% block header %}
+<a href="/data" class="logo">
+
+  <span class="logo-mini"><b></b>P</span>
+  <span class="logo-lg"><b>Analyst</b></span>
+</a>
+
+<nav class="navbar navbar-static-top" role="navigation">
+  <!-- Sidebar toggle button-->
+  <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+    <span class="sr-only">Toggle navigation</span>
+  </a>
+  <!-- Navbar Right Menu -->
+  <div class="navbar-custom-menu">
+    <ul class="nav navbar-nav">
+      <!-- Messages: style can be found in dropdown.less-->
+      <li class="dropdown messages-menu">
+        <!-- Menu toggle button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-envelope-o"></i>
+          <span class="label label-success">4</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="header">4条新消息</li>
+          <li>
+            <!-- inner menu: contains the messages -->
+            <ul class="menu">
+              <li><!-- start message -->
+                <a href="#">
+                  <div class="pull-left">
+                    <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="img-circle" alt="User Image">
+                  </div>
+                  <h4>
+                    同事小李
+                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                  </h4>
+                  <!-- The message -->
+                  <p>请帮我查看一下服务器日志文件</p>
+                </a>
+              </li>
+              <!-- end message -->
             </ul>
+            <!-- /.menu -->
+          </li>
+          <li class="footer"><a href="#">查看所有消息</a></li>
+        </ul>
+      </li>
+      <!-- /.messages-menu -->
+
+      <li class="dropdown user user-menu">
+        <!-- Menu Toggle Button -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <!-- The user image in the navbar-->
+          <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="user-image" alt="User Image">
+          <!-- hidden-xs hides the username on small devices so only the image appears. -->
+          <span class="hidden-xs">Administrator</span>
+        </a>
+        <ul class="dropdown-menu">
+          <!-- The user image in the menu -->
+          <li class="user-header">
+            <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="img-circle" alt="User Image">
+
+            <p>
+                Administrator
+              <small>这家伙很懒，什么都没有留下…</small>
+            </p>
+          </li>
+          <!-- Menu Body -->
+
+          <!-- Menu Footer-->
+          <li class="user-footer">
+            <div class="pull-left">
+              <a href="#" class="btn btn-info btn-flat">个人信息</a>
+            </div>
+            <div class="pull-right">
+              <a href="#" class="btn btn-warning btn-flat">退出登陆</a>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <!-- Control Sidebar Toggle Button -->
+      <li>
+        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>  
+{% endblock %}
+
+
+{% block sidebar %}
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="{{url_for('static', filename='dist/img/user2.jpg')}}" class="img-circle" alt="User Image">
         </div>
-    </div>
-{% endblock %}
-
-{% block detail %}
-    <div class="panel panel-info">
-      <div class="panel-heading">
-          <h1>数据统计</h1>
+        <div class="pull-left info">
+          <p> Administrator </p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+        </div>
       </div>
-      <div class="panel-body">
-        {{ echart1| safe }}
-        {{ echart2| safe }}
-      </div>
-    </div>
+      
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">功能模版</li>
+        
+        <li><a href="/data"><i class="fa fa-tripadvisor"></i> <span>数据统计</span></a></li>
+        <li><a href="#"><i class="fa fa-bar-chart"></i> <span>数据分析</span></a></li>
+        <li><a href="#"><i class="fa fa-object-ungroup"></i> <span>用户画像</span></a></li>
+        <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>待定标签</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>待定标签</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#">下拉菜单1</a></li>
+            <li><a href="#">下拉菜单2</a></li>
+            <li><a href="#">下拉菜单3</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  {% endblock %}
+  <!-- Content Wrapper. Contains page content -->
+  {% block content %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        数据总览
+        <small>纵观全局，整体把握用户数据</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">数据统计</li>
+      </ol>
+    </section>
 
-{% endblock %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="box">
+        <div class="box-header">
+          <strong class="box-title">页面数据</strong>
+          <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                      title="Collapse">
+                <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            
+              <div class="box-body col-md-6">
+                <div class="box box-info">
+                  {{ echart1 | safe }}
+                </div>
+              </div>
+            <div class="box-body col-md-6">
+              <div class="box box-primary">
+                 {{ echart2 | safe }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+          <div class="box-header">
+            <strong class="box-title">用户数据</strong>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fa fa-minus"></i></button>
+              </div>
+          </div>
+          <div class="box-body">
+            <div class="row">
+                <div class="box-body">
+                  <div class="box box-info">
+                    {{ echarts | safe }}
+                    {{ script_list }}
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- /.content -->
+  {% endblock %}
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  {% block controler %}
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane active" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">最近的活动</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">六级成绩查询</h4>
+                <p>将会在 4月24号</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">任务进程</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <h4 class="control-sidebar-subheading">
+                设计智能车变速算法
+                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">设置</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              屏蔽消息
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              勾选了该选项，你就不会被动接受消息通知
+            </p>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  {% endblock %}
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+</body>
+</html>
