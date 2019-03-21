@@ -137,7 +137,7 @@ def lost_user(user_id_row: str, time_row: str, sql: str, offline_limit=5, date_s
     delta_from_now = [datetime(2015, 5, 1) - pd.DataFrame({'id':i[user_id_row], 'time':pd.to_datetime(i[time_row],
                                                       format=date_str_format)}).groupby('id').max() for i in gener]
     delta_from_now = [i.time.apply(lambda x: x.days) for i in delta_from_now]
-    delta_from_now = pd.concat(delta_from_now)
+    delta_from_now = pd.concat(delta_from_now) 
     return delta_from_now[delta_from_now > offline_limit].count()
 
 
