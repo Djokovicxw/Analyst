@@ -38,11 +38,15 @@ def data():
     dict2 = [900, 142, 134, 111, 300, 512, 567]
     bar = gen_pie_img("具体行为", dict1, dict2, "Last Week", True)
     line = Line("访问量")
-    sql = "select ymd from all_gzdata"
+    line.add('', [i for i in range(1, 30)], [random.randint(500,1000) for _ in range (1,30) ])
+
+    
+    sql = "select userID,ymd from all_gzdata"
     lostUser = lost_user('userID', 'ymd', sql)
     alluser = db_iter('select count(*) from all_gzdata')
-    line.add('', [i for i in range(1, 30)], [random.randint(500,1000) for _ in range (1,30) ])
     liquid = Liquid("Lost User", [lostUser / alluser])
+    
+    
     return render_template("data.html",
                            echart1=bar.render_embed(),
                            echart2=line.render_embed(),
