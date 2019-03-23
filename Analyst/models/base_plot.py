@@ -55,7 +55,7 @@ def visit_time(time_row: str, sql: str):
     counts = [pd.to_datetime(i[time_row]).apply(lambda x: x.hour).value_counts() for i in gener]
     counts = pd.concat(counts).groupby(level=0).sum()
     counts = counts.reset_index()
-    return counts.dex, list(counts.num)
+    return list(counts['index']), list(counts[time_row])
 
 
 def visit_days(date_row: str, sql: str):
@@ -69,7 +69,7 @@ def visit_days(date_row: str, sql: str):
     counts = [pd.to_datetime(i[date_row]).apply(lambda x: x.day).value_counts() for i in gener]
     counts = pd.concat(counts).groupby(level=0).sum()
     counts = counts.reset_index()
-    return counts.dex, list(counts.num)
+    return list(counts['index']), list(counts[date_row])
 
 
 def refer_ana(refer_row: str, sql: str):
@@ -91,7 +91,7 @@ def refer_ana(refer_row: str, sql: str):
     counts = counts.reset_index()
     counts.columns = ['dex', 'num']
     counts = counts[counts.num > 100].sort_values('num', ascending=False)
-    return counts.dex, list(counts.num)
+    return list(counts['index']), list(counts[refer_row])
 
 
 def ua_ana(ua_row: str, sql: str):
@@ -99,7 +99,7 @@ def ua_ana(ua_row: str, sql: str):
     对user_agent进行分析，包括操作系统，终端设备
     :param ua_row: user_agent列名
     :param sql: sql语句
-    :return: 返回os与，device的统计信息
+    :return: 返回os与device的统计信息
     """
     gener = db_iter(sql)
     ua_parse = [i[ua_row].dropna().apply(lambda x: parse(x)) for i in gener]
