@@ -8,3 +8,4 @@ Analyst/static/dist/*
 Analyst/settings.py
 *.pyc
 Analyst/static/plugins/*
+Analyst/static/js/*

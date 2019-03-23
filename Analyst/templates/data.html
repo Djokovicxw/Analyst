@@ -1,5 +1,11 @@
 {% extends 'index.html' %}
 
+{% block head %}
+{{super()}}
+{% for js_file in script_list %}
+<script src="../static/js/{{js_file}}.js"></script>
+{% endfor %}
+{% endblock %}
 {% block header %}
     <a href="/data" class="logo">
 
@@ -246,9 +252,14 @@
             </div>
             <div class="box-body">
                 <div class="row">
-                    <div class="box-body">
+                    <div class="box-body col-md-6">
                         <div class="box box-info">
                             {{ echart3 | safe }}
+                        </div>
+                    </div>
+                    <div class="box-body col-md-6">
+                        <div class="box box-primary">
+                            {{ echart4 | safe }}
                         </div>
                     </div>
                 </div>
@@ -338,8 +349,3 @@
         <!-- /.tab-pane -->
     </div>
 {% endblock %}
-<!-- /.control-sidebar -->
-<!-- Add the sidebar's background. This div must be placed immediately after the
-control sidebar -->
-</body>
-</html>

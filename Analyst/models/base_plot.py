@@ -5,6 +5,17 @@ from settings import DbConnect as db
 from user_agents import parse
 from datetime import datetime
 
+def db_sql(sql:str):
+    """
+    简单地执行sql语句
+    """
+    con = pymysql.connect(host=db.host, user=db.user, password=db.pwd, db=db.db)
+    cur = con.cursor()
+    cur.execute(sql)
+    res = cur.fetchone()
+    con.close()
+    return res
+    
 
 def db_iter(sql: str, size: int = 10000):
     """
@@ -49,7 +60,7 @@ def visit_time(time_row: str, sql: str):
 
 def visit_days(date_row: str, sql: str):
     """
-    统计一个月内
+    统计一个月内访问网站的次数
     :param date_row:
     :param sql:
     :return:
@@ -136,7 +147,7 @@ def lost_user(user_id_row: str, time_row: str, sql: str, offline_limit=5, date_s
     gener = db_iter(sql)
     delta_from_now = [datetime(2015, 5, 1) - pd.DataFrame({'id':i[user_id_row], 'time':pd.to_datetime(i[time_row],
                                                       format=date_str_format)}).groupby('id').max() for i in gener]
-    delta_from_now = [i.time.apply(lambda x: x.days) for i in delta_from_now]
+    delta_from_now = [i.time.apply(lambda x: x.day) for i in delta_from_now]
     delta_from_now = pd.concat(delta_from_now) 
     return delta_from_now[delta_from_now > offline_limit].count()
 

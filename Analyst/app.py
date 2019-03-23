@@ -42,15 +42,17 @@ def data():
 
     
     sql = "select userID,ymd from all_gzdata"
-    lostUser = lost_user('userID', 'ymd', sql)
-    alluser = db_iter('select count(*) from all_gzdata')
-    liquid = Liquid("Lost User", [lostUser / alluser])
+    lostUser = lost_user('userID', 'ymd', sql, offline_limit=15)
+    alluser = db_sql('select count(*) from all_gzdata')
+    liquid = Liquid("客户损失量")
+    liquid.add('过去一个月的客户损失量', [lostUser / alluser])
     
     
     return render_template("data.html",
                            echart1=bar.render_embed(),
                            echart2=line.render_embed(),
-                           echart3=liquid.render_embed())
+                           echart3=liquid.render_embed(),
+                           script_list = liquid.get_js_dependencies())
 
 
 def gen_pie_img(name, dict1, dict2, title="title", flag=True):
