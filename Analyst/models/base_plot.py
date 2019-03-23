@@ -91,7 +91,7 @@ def refer_ana(refer_row: str, sql: str):
     counts = counts.reset_index()
     counts.columns = ['dex', 'num']
     counts = counts[counts.num > 100].sort_values('num', ascending=False)
-    return list(counts['index']), list(counts[refer_row])
+    return counts.dex, list(counts.num)
 
 
 def ua_ana(ua_row: str, sql: str):
@@ -107,7 +107,7 @@ def ua_ana(ua_row: str, sql: str):
     device = pd.concat(device).groupby(level=0).sum()
     os_info = [i.apply(lambda x: x.os.family).value_counts() for i in ua_parse]
     os_info = pd.concat(os_info).groupby(level=0).sum()
-    return (device.index, list(device.values)), (os_info.index, list(os_info.values))
+    return (list(device['index']), list(device.values)), (list(os_info['index']), list(os_info.values))
 
 
 def actvt_user(user_id_row: str, time_row: str, sql: str, ac_type: str, date_str_format="%Y-%m-%d %H:%M:%S"):
@@ -127,7 +127,7 @@ def actvt_user(user_id_row: str, time_row: str, sql: str, ac_type: str, date_str
             'id': i[user_id_row]}) for i in gener]
     elif ac_type == 'month':
         user = [pd.DataFrame(
-            {'date': pd.to_datetime(i[time_row], format=date_str_format).apply(lambda x: x.month()),
+            {'date': pd.to_datetime(i[time_row], format=date_str_format).apply(lambda x: x.month),
             'id': i[user_id_row]}) for i in gener]
     user = [i.drop_duplicates().groupby('date').count() for i in user]
     return pd.concat(user).groupby('date').sum()

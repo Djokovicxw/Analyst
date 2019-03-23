@@ -16,12 +16,6 @@ Bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 
-def gen_pie_img(name, dict1, dict2, title="title", flag=True):
-    pie = Pie(title)
-    pie.add(name, dict1, dict2, is_label_show=flag)
-    return pie
-
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -42,7 +36,8 @@ def login_in():
 def data():
     dict1 = ['访问主页','注册', '购买商品', '售后询问', '技术咨询', '访问论坛', '其他']
     dict2 = [900, 142, 134, 111, 300, 512, 567]
-    pie = gen_pie_img("具体行为", dict1, dict2, "Last Week", True)
+    pie = Pie("用户行为")
+    pie.add("具体行为", dict1, dict2)
     line = Line('访问量')
     sql = "select timestamp_format from all_gzdata"
     x_dict, y_dict = visit_time('timestamp_format', sql)
@@ -56,13 +51,40 @@ def data():
     liquid = Liquid("客户损失量")
     liquid.add('超过5天未访问页面为沉默用户', [lostUser / alluser])
 
-    
+    ## 来源统计Pie图
+    pie2 = Pie("来源统计")
+    sql = "select fullReferrerURL from all_gzdata" 
+    x_dict, y_dict = refer_ana('fullReferrerURL', sql)
+    pie2.add('Reffer URL', x_dict, y_dict)
     return render_template("data.html",
-                           echart1=pie.render_embed(),
-                           echart2=line.render_embed(),
-                           echart3=liquid.render_embed(),
-                           echart4=bar.render_embed(),
-                           script_list = liquid.get_js_dependencies())
+                           echart1=line.render_embed(),
+                           echart2=pie.render_embed(),
+                           echart3=bar.render_embed(),
+                           echart4=pie2.render_embed())
+
+
+@app.route("/user")
+def user():
+    sql = "select userID,ymd from all_gzdata"
+    lostUser = lost_user('userID', 'ymd', sql, offline_limit=15)
+    alluser = db_sql('select count(*) from all_gzdata')
+    liquid1 = Liquid("客户损失量")
+    liquid1.add('超过5天未访问页面为沉默用户', [lostUser / alluser])
+    sql = "select userID, timestamp_format from all_gzdata where timestamp_format like '2015-02-03%'"
+    actUser = actvt_user('userID', 'timestamp_format', sql, 'day')
+    liquid2 = Liquid('活跃用户量')
+    liquid2.add('五天内访问过页面的用户', [actUser / alluser])
+    sql = "select userAgent from all_gzdata"
+    de_dict, de_ydict, os_dict, os_ydict = ua_ana('userAgent', sql)
+    pie1 = Pie("用户使用的设备")
+    pie1.add("具体设备", de_dict, de_ydict)
+    pie2 = Pie('用户使用的操作系统')
+    pie2.add('操作系统', os_dict, os_ydict)
+    return render_template('user,html', echart1=liquid1.render_embed(),
+                                        echart2=liquid2.render_embed(),
+                                        echart3=pie1.render_embed(),
+                                        echart4=pie2.render_embed(),
+                                        script_list=liquid1.get_js_dependencies())
 
 
 @app.errorhandler(404)
